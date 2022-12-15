@@ -1,0 +1,44 @@
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+background = #00ff0f
+foreground = #f0ff0f
+
+[settings]
+throttle-output = 15
+throttle-output-for = 10
+screenchange-reload = true
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+[bar/mybar]
+modules-left = i3
+modules-right = date
+
+[module/date]
+type = internal/date
+date = %Y-%m-%d%
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = false
+index-sort = false
+enable-click = true
+enable-scroll = true
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = false
+
+#label-mode = %mode%
+#label-mode-padding = 4
+#label-mode-foreground = #000000
+#label-mode-background = #FFBB00
+
+label-focused-background = #0000ff
+label-focused-foreground = #00ff00
+label-focused-underline = #ff0000
+label-focused-padding = 0
