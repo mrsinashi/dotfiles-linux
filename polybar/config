@@ -1,8 +1,34 @@
+[bar/mybar]
+background = #223C43
+foreground = #f3f4f5
+
+modules-left = i3 xwindow 
+modules-right = cpu2 memory3 volume date xkeyboard2 uptime variety trash wireless-network powermenu
+
+[module/date]
+type = internal/date
+interval = 1
+date = %d.%m.%Y
+time = %H:%M:%S
+
+format-prefix = " "
+format-prefix-foreground = #c1941a
+format-underline = #6C6565
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+label = %time% |  %date% 
 [global/wm]
 margin-top = 0
 margin-bottom = 0
-background = #00ff0f
-foreground = #f0ff0f
+
+[colors]
+; Nord theme ============
+background = #2F343F
+foreground = #f3f4f5
+alert = #d08770
+volume-min = #a3be8c
+volume-med = #ebcb8b
+volume-max = #bf616a
 
 [settings]
 throttle-output = 15
@@ -15,30 +41,20 @@ compositing-underline = over
 compositing-border = over
 
 [bar/mybar]
-modules-left = i3
-modules-right = date
+background = ${colors.background}
+foreground = ${colors.foreground}
+modules-left = i3 xwindow
+modules-right = cpu2 memory3 volume date xkeyboard2 uptime variety trash wireless-network powermenu
 
 [module/date]
 type = internal/date
-date = %Y-%m-%d%
+interval = 1
+date = %d.%m.%Y
+time = %H:%M:%S
+label = %time% | %date%
 
-[module/i3]
-type = internal/i3
-pin-workspaces = true
-strip-wsnumbers = false
-index-sort = false
-enable-click = true
-enable-scroll = true
-wrapping-scroll = false
-reverse-scroll = false
-fuzzy-match = false
-
-#label-mode = %mode%
-#label-mode-padding = 4
-#label-mode-foreground = #000000
-#label-mode-background = #FFBB00
-
-label-focused-background = #0000ff
-label-focused-foreground = #00ff00
-label-focused-underline = #ff0000
-label-focused-padding = 0
+format-prefix-padding-left = 0
+format-prefix-padding-right = 0
+format-prefix-foreground = ${colors.foreground}
+label-padding = 0
+label-foreground = ${colors.foreground}
