@@ -1,22 +1,3 @@
-[bar/mybar]
-background = #223C43
-foreground = #f3f4f5
-
-modules-left = i3 xwindow 
-modules-right = cpu2 memory3 volume date xkeyboard2 uptime variety trash wireless-network powermenu
-
-[module/date]
-type = internal/date
-interval = 1
-date = %d.%m.%Y
-time = %H:%M:%S
-
-format-prefix = " "
-format-prefix-foreground = #c1941a
-format-underline = #6C6565
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-label = %time% |  %date% 
 [global/wm]
 margin-top = 0
 margin-bottom = 0
@@ -40,21 +21,219 @@ compositing-overline = over
 compositing-underline = over
 compositing-border = over
 
+#format-foreground = #FF0000
+#format-background = #00FF00
+#;format-underline = #40AD4B
+#format-underline = #3EC13F
+#format-overline =
+#format-spacing =
+#format-padding =
+#format-margin =
+#format-offset =
+
 [bar/mybar]
+modules-left = i3
+modules-right = cpu memory volume xkeyboard datetime powermenu
+
 background = ${colors.background}
 foreground = ${colors.foreground}
-modules-left = i3 xwindow
-modules-right = cpu2 memory3 volume date xkeyboard2 uptime variety trash wireless-network powermenu
 
-[module/date]
+width = 100%
+height = 36
+
+line-size = 2
+line-color = #000000
+
+module-margin-left = 1
+module-margin-right = 1
+
+tray-detached = false
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 2
+tray-maxsize = 20
+tray-scale = 1.0
+tray-position = center
+tray-background = ${colors.background}
+
+font-0 = "Noto Sans:size=12;0"
+font-1 = "FontAwesome:size=14;0"
+font-2 = "DejaVu Sans:size=10;0"
+font-3 = "DejaVu Sans:size=12;0"
+font-4 = "Noto Sans:size=16;0"
+font-5 = "Noto Sans Mono:style=Bold:size=13;0"
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = false
+index-sort = false
+enable-click = true
+enable-scroll = true
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = false
+
+# ЗНАЧКИ РАБОЧИХ СТОЛОВ
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;10
+ws-icon-default = ""
+
+format = <label-state> <label-mode>
+
+label-mode = %mode%
+label-mode-padding = 12
+label-mode-foreground = #000000
+label-mode-background = #7fc7ff
+
+label-focused = %icon%
+label-focused-background = ${colors.background}
+label-focused-foreground = #7fc7ff
+label-focused-underline = #7fc7ff
+label-focused-padding = 2
+
+label-unfocused = %icon%
+label-unfocused-padding = 2
+label-unfocused-background = ${colors.background}
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-underline =
+
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = 2
+
+label-urgent = %icon%
+label-urgent-background = ${self.label-focused-background}
+label-urgent-foreground = #db104e
+label-urgent-padding = 2
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-prefix = ""
+format-prefix-foreground = #cd1f3f
+format-underline = #cd1f3f
+
+format = <label>
+
+format-padding = 0
+
+label = %percentage:3%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-padding = 0
+label = %percentage_used:3%% [%mb_used%]
+format = <label>
+format-prefix = ""
+format-prefix-foreground = #3384d0
+format-underline = #3384d0
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+[module/volume]
+type = internal/volume
+format-volume = "<label-volume>  <bar-volume>"
+
+label-volume = ""
+label-volume-foreground = #5fcf3b
+format-volume-underline = #5fcf3b
+
+format-muted-prefix = ""
+format-muted-prefix-foreground = #cd1f3f
+format-muted-underline = #cd1f3f
+
+label-muted = " "
+label-muted-foreground = #cd1f3f
+
+bar-volume-width = 20
+
+bar-volume-indicator = █
+bar-volume-indicator-font = 4
+
+bar-volume-fill = █
+bar-volume-fill-font = 3
+
+bar-volume-empty = ▁
+bar-volume-empty-font = 3
+
+bar-volume-foreground-0 = #5fcf3b
+#bar-volume-foreground-1 = #5fcf3b
+#bar-volume-foreground-2 = #5fcf3b
+#bar-volume-foreground-3 = #5fcf3b
+#bar-volume-foreground-4 = #5fcf3b
+#bar-volume-foreground-5 = #5fcf3b
+#bar-volume-foreground-6 = #5fcf3b
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+#format-prefix = " "
+#format-prefix-foreground = ${colors.foreground}
+format-underline = #ffffff
+format-foreground = ${colors.foreground}
+label-layout = "%layout:3%"
+label-layout-font = 5
+label-indicator-background = ${colors.background}
+label-indicator-underline = ${colors.foreground}
+
+[module/datetime]
 type = internal/date
 interval = 1
 date = %d.%m.%Y
 time = %H:%M:%S
-label = %time% | %date%
+label =  %time%    %date%
+label-underline = #ffffff
 
-format-prefix-padding-left = 0
-format-prefix-padding-right = 0
-format-prefix-foreground = ${colors.foreground}
-label-padding = 0
-label-foreground = ${colors.foreground}
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format = <menu><label-toggle>
+format-font = 6
+format-underline = #cd1f3f
+
+menu-0-0 = ""
+menu-0-0-padding-left = 1
+menu-0-0-exec = menu-open-1
+menu-0-1 = " "
+menu-0-2 = ""
+menu-0-2-exec = menu-open-2 
+
+menu-1-0 = " Reboot"
+menu-1-0-exec = systemctl reboot
+ 
+menu-2-0 = " Shutdown"
+menu-2-0-exec = systemctl poweroff
+
+label-open = ""
+label-open-foreground = 
+label-open-padding = 2
+label-open-padding-left = 1
+label-open-font = 6
+
+label-close = ""
+label-close-foreground = #ffffff
+label-close-padding = 2
+label-close-padding-left = 1
+label-close-font = 6
+
+format-foreground = #cd1f3f
+format-background = ${colors.background}
