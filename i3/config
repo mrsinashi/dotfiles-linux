@@ -11,8 +11,13 @@
 
 set $mod Mod4
 
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 bindsym $mod+E exec --no-startup-id doublecmd $HOME /
 bindsym $mod+Shift+E exec --no-startup-id lxqt-sudo doublecmd / $HOME
+bindsym $mod+B exec --no-startup-id firefox
+bindsym Print exec --no-startup-id flameshot gui
+bindsym $mod+D exec --no-startup-id rofi -show run -font "Noto Sans 13"
 exec_always --no-startup-id feh --bg-scale /usr/share/backgrounds/custom/dolomites-italy-dolomity-italiia-gory.jpg
 exec_always --no-startup-id killall -q polybar; while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done; polybar mybar &
 
@@ -46,7 +51,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+t exec alacritty
+bindsym $mod+t exec qterminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -54,7 +59,7 @@ bindsym Mod1+F4 kill
 bindsym $mod+F4 kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -184,6 +189,6 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-}
+#bar {
+#        status_command i3status
+#}
