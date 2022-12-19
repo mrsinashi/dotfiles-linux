@@ -15,9 +15,10 @@ bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 bindsym $mod+E exec --no-startup-id doublecmd $HOME /
 bindsym $mod+Shift+E exec --no-startup-id lxqt-sudo doublecmd / $HOME
-bindsym $mod+B exec --no-startup-id firefox
+bindsym $mod+B exec --no-startup-id min
 bindsym Print exec --no-startup-id flameshot gui
 bindsym $mod+D exec --no-startup-id rofi -show run -font "Noto Sans 13"
+bindsym $mod+C exec --no-startup-id code
 exec_always --no-startup-id feh --bg-scale /usr/share/backgrounds/custom/dolomites-italy-dolomity-italiia-gory.jpg
 exec_always --no-startup-id killall -q polybar; while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done; polybar mybar &
 

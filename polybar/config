@@ -3,13 +3,17 @@ margin-top = 0
 margin-bottom = 0
 
 [colors]
-; Nord theme ============
 background = #2F343F
 foreground = #f3f4f5
 alert = #d08770
 volume-min = #a3be8c
 volume-med = #ebcb8b
 volume-max = #bf616a
+
+[sets]
+panel-width = 100%
+panel-height = 34
+tray-height = 30
 
 [settings]
 throttle-output = 15
@@ -21,16 +25,6 @@ compositing-overline = over
 compositing-underline = over
 compositing-border = over
 
-#format-foreground = #FF0000
-#format-background = #00FF00
-#;format-underline = #40AD4B
-#format-underline = #3EC13F
-#format-overline =
-#format-spacing =
-#format-padding =
-#format-margin =
-#format-offset =
-
 [bar/mybar]
 modules-left = i3
 modules-right = cpu memory volume xkeyboard datetime powermenu
@@ -38,28 +32,29 @@ modules-right = cpu memory volume xkeyboard datetime powermenu
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-width = 100%
-height = 36
+width = ${sets.panel-width}
+height = ${sets.panel-height}
 
 line-size = 2
 line-color = #000000
 
 module-margin-left = 1
 module-margin-right = 1
+module-padding-top = 4
 
 tray-detached = false
 tray-offset-x = 0
 tray-offset-y = 0
-tray-padding = 2
-tray-maxsize = 20
+tray-padding = 4
+tray-maxsize = ${sets.tray-height}
 tray-scale = 1.0
 tray-position = center
 tray-background = ${colors.background}
 
 font-0 = "Noto Sans:size=12;0"
 font-1 = "FontAwesome:size=14;0"
-font-2 = "DejaVu Sans:size=10;0"
-font-3 = "DejaVu Sans:size=12;0"
+font-2 = "DejaVu Sans:size=6;0"
+font-3 = "DejaVu Sans:size=10;0"
 font-4 = "Noto Sans:size=16;0"
 font-5 = "Noto Sans Mono:style=Bold:size=13;0"
 
@@ -73,8 +68,6 @@ enable-scroll = true
 wrapping-scroll = false
 reverse-scroll = false
 fuzzy-match = false
-
-# ЗНАЧКИ РАБОЧИХ СТОЛОВ
 
 ws-icon-0 = 1;
 ws-icon-1 = 2;
@@ -139,7 +132,7 @@ label = %percentage:3%%
 type = internal/memory
 interval = 2
 format-padding = 0
-label = %percentage_used:3%% [%mb_used%]
+label = %percentage_used:3%% [%gb_used%]
 format = <label>
 format-prefix = ""
 format-prefix-foreground = #3384d0
