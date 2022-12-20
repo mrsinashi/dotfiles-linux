@@ -18,7 +18,7 @@ compositing-border = over
 
 [bar/mybar]
 modules-left = i3
-modules-right = cpu memory volume xkeyboard datetime powermenu
+modules-right = usb-dev ip cpu memory volume xkeyboard datetime powermenu
 
 width = 100%
 height = 36
@@ -38,7 +38,7 @@ font-0 = "Noto Sans:size=12;0"
 font-1 = "FontAwesome:size=14;0"
 font-2 = "DejaVu Sans:size=6;0"
 font-3 = "DejaVu Sans:size=8;0"
-font-4 = "Noto Sans:size=16;0"
+font-4 = "Clear Sans:size=18;0"
 font-5 = "Noto Sans Mono:style=Bold:size=13;0"
 
 [module/i3]
@@ -95,6 +95,27 @@ label-urgent-underline = #cd1f3f
 
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
+
+[module/usb-udev]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/system-usb-udev.sh
+tail = true
+click-left = $HOME/.config/polybar/scripts/system-usb-udev.sh --mount &
+click-right = $HOME/.config/polybar/scripts/system-usb-udev.sh --unmount &
+format-prefix = ""
+format-prefix-margin-right = 2
+format-foreground = #ffffff
+format-underline = #ffffff
+
+[module/ip]
+type = custom/script
+exec = /usr/bin/hostname -I
+interval = 20
+tail = true
+format-prefix = ""
+format-prefix-margin-right = 2
+format-foreground = #ffffff
+format-underline = #ffffff
 
 [module/cpu]
 type = internal/cpu
