@@ -14,10 +14,14 @@ set $mod Mod4
 set $ws1 "1< home >"
 set $ws2 "2< Web >"
 set $ws3 "3< Code >"
+set $ws3 "4< Office >"
 
 assign [class="Min"] $ws2
 assign [class="Google-chrome"] $ws2
 assign [class="Code"] $ws3
+assign [class="tm"] $ws4
+assign [class="pm"] $ws4
+assign [class="pr"] $ws4
 
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
