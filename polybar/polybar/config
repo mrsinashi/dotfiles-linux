@@ -1,0 +1,218 @@
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[colors]
+background = #2F343F
+foreground = #f3f4f5
+
+[settings]
+throttle-output = 15
+throttle-output-for = 10
+screenchange-reload = true
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+[bar/mybar]
+modules-left = i3
+modules-right = usb-dev ip cpu memory volume xkeyboard datetime powermenu
+
+width = 100%
+height = 36
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+module-margin = 1
+
+tray-detached = false
+tray-padding = 2
+tray-maxsize = 28
+tray-scale = 1.0
+tray-position = center
+
+font-0 = "Noto Sans:size=12;0"
+font-1 = "FontAwesome:size=14;0"
+font-2 = "DejaVu Sans:size=6;0"
+font-3 = "DejaVu Sans:size=8;0"
+font-4 = "Clear Sans:size=18;0"
+font-5 = "Noto Sans Mono:style=Bold:size=13;0"
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = false
+index-sort = false
+enable-click = true
+enable-scroll = true
+wrapping-scroll = false
+reverse-scroll = false
+fuzzy-match = false
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;10
+
+format = <label-state> <label-mode>
+
+label-mode = [%mode%]
+label-mode-font = 5
+label-mode-foreground = #cd1f3f
+label-mode-underline = #cd1f3f
+
+label-focused = %icon%
+label-focused-foreground = #7fc7ff
+label-focused-padding = 2
+label-focused-margin = 1
+label-focused-underline = #7fc7ff
+
+label-unfocused = %icon%
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-padding = 2
+label-unfocused-margin = 1
+label-unfocused-underline = #ffffff
+
+label-visible = %icon%
+label-visible-padding = 2
+label-visible-margin = 1
+label-visible-underline = #7fc7ff
+
+label-urgent = %icon%
+label-urgent-foreground = #cd1f3f
+label-urgent-padding = 2
+label-urgent-margin = 1
+label-urgent-underline = #cd1f3f
+
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+[module/usb-udev]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/system-usb-udev.sh
+tail = true
+click-left = $HOME/.config/polybar/scripts/system-usb-udev.sh --mount &
+click-right = $HOME/.config/polybar/scripts/system-usb-udev.sh --unmount &
+format-prefix = ""
+format-prefix-margin-right = 2
+format-foreground = #ffffff
+format-underline = #ffffff
+
+[module/ip]
+type = custom/script
+exec = /usr/bin/hostname -I
+interval = 20
+tail = true
+format-prefix = ""
+format-prefix-margin-right = 2
+format-foreground = #ffffff
+format-underline = #ffffff
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+
+format-prefix = ""
+format-prefix-foreground = #cd1f3f
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-underline = #cd1f3f
+
+label = %percentage:3%%
+format = <label>
+
+[module/memory]
+type = internal/memory
+interval = 2
+
+format-prefix = ""
+format-prefix-foreground = #3384d0
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+format-underline = #3384d0
+
+label = %percentage_used:3%% [%gb_used%]
+format = <label>
+
+[module/volume]
+type = internal/volume
+format-volume = "<label-volume>  <bar-volume>"
+
+label-volume = ""
+label-volume-foreground = #5fcf3b
+format-volume-underline = #5fcf3b
+
+label-muted = " "
+label-muted-foreground = #cd1f3f
+format-muted-underline = #cd1f3f
+
+bar-volume-width = 20
+bar-volume-foreground-0 = #5fcf3b
+
+bar-volume-indicator = █
+bar-volume-indicator-font = 4
+
+bar-volume-fill = █
+bar-volume-fill-font = 3
+
+bar-volume-empty = ▁
+bar-volume-empty-font = 3
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+label-layout = "%layout:3%"
+label-layout-font = 5
+label-indicator-background = ${colors.background}
+format-underline = #ffffff
+
+[module/datetime]
+type = internal/date
+interval = 1
+date = %d.%m.%Y
+time = %H:%M:%S
+label =  %time%    %date%
+label-underline = #ffffff
+
+[module/powermenu]
+type = custom/menu
+expand-right = true
+
+label-open = ""
+label-open-foreground =
+label-open-padding = 2
+label-open-padding-left = 1
+label-open-font = 6
+
+label-close = ""  
+label-close-foreground = #ffffff
+label-close-padding = 2
+label-close-padding-left = 1
+label-close-font = 6
+
+menu-0-0 = ""
+menu-0-0-padding-left = 1
+menu-0-0-exec = menu-open-1
+menu-0-1 = " "
+menu-0-2 = ""
+menu-0-2-exec = menu-open-2 
+
+menu-1-0 = " Reboot"
+menu-1-0-exec = systemctl reboot
+ 
+menu-2-0 = " Shutdown"
+menu-2-0-exec = systemctl poweroff
+
+format-foreground = #cd1f3f
+format = <menu><label-toggle>
+format-font = 6
+format-underline = #cd1f3f
