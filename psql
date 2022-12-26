@@ -1,7 +1,11 @@
-[sudo -u postgres psql -h 127.0.0.1 -p 5432 -U postgres -s l2]
+[sudo -u postgres psql]
 create database l2;
 ALTER USER postgres WITH ENCRYPTED PASSWORD '123456';
 grant all privileges on database l2 to postgres;
 
+sudo -u postgres psql -h 127.0.0.1 -p 5432 -U postgres -s l2
+
 [sudo nano /etc/postgresql/14/main/pg_hba.conf]
 host    all             postgres        127.0.0.1/32            md5
+
+sudo systemctl restart postgresql
