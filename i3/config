@@ -44,7 +44,7 @@ bindsym $mod+G exec --no-startup-id evolution
 bindsym --release $mod+K exec --no-startup-id xkill
 
 exec_always --no-startup-id setxkbmap "us,ru" ",winkeys" "grp:alt_shift_toggle"
-exec_always --no-startup-id feh --bg-scale /usr/share/backgrounds/custom/default.jpg
+exec_always --no-startup-id hsetroot -root -solid grey
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
