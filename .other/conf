@@ -5,3 +5,4 @@ ssh-keygen -t rsa -b 4096 -C "ignatiusferum@gmail.com"
 sudo nano /etc/redis/redis.conf
 sudo nano /etc/postgresql/14/main/postgresql.conf
 xwininfo -tree -root
+/usr/share/xfce4/terminal/colorschemes/

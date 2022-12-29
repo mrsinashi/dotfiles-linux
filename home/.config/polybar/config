@@ -49,7 +49,7 @@ index-sort = false
 enable-click = true
 enable-scroll = true
 wrapping-scroll = false
-reverse-scroll = false
+reverse-scroll = true
 fuzzy-match = false
 
 ws-icon-0 = 1;
