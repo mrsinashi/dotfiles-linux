@@ -9,8 +9,8 @@ blue="\033[36m"
 default="\033[0m\n"
 
 update_configs() {
-    home_dirs=$(cd home; find . -mindepth 2 -type d | sed -r 's/.{,2}//'; cd ..)
-    home_files=$(cd home; find . -mindepth 2 -type f | sed -r 's/.{,2}//'; cd ..)
+    home_dirs=$(cd home; find . -mindepth 1 -type d | sed -r 's/.{,2}//'; cd ..)
+    home_files=$(cd home; find . -mindepth 1 -type f | sed -r 's/.{,2}//'; cd ..)
     
     echo -e "\033[33m[HOME]\033[0m\n"
     
