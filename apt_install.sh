@@ -21,7 +21,7 @@ apt_upgrade() {
     if [[ $upgrade == "True" ]]
     then
         echo -e "\033[1m\033[7mStarting apt upgrade packages...\033[0m";
-        apt upgrade;
+        apt upgrade -y;
         echo -e "\033[0;32m\033[1m\033[7mUpgrading packages succesfull\033[0m";
     fi
 }
