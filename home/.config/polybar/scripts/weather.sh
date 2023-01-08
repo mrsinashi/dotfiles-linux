@@ -122,7 +122,7 @@ parse_icon() {
     elif [ $wind_speed -ge 6 ]
     then
         wind_icon=" %{T8}${blue}[ %{T7}W%{T8} $wind_speed m/s ]${white}%{T7}"
-    elif [ $wind_speed -ge 4 ]
+    elif [ $wind_speed -ge 3 ]
     then
         wind_icon=" %{T-}[ %{T7}W%{T-} $wind_speed m/s ]%{T7}"
         

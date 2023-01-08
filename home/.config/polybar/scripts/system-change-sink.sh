@@ -1,6 +1,6 @@
 #!/bin/bash
 current_sink=$(pacmd list-sinks | grep -e 'name:' -e 'index' | sed -n '{H;$!d};x;s|^\n||;s|\n|:|g;s|.*\*||g;s|>.*||g;s|.*<||g;p;')
-free_sink=$(pacmd list-sinks | grep -e 'name:' -e 'index' | sed -n '{H;$!d};x;s|^\n||;s|\n|:|g;s|.*    i||g;s|>.C*||g;s|.*<||g;p;')
+free_sink=$(pacmd list-sinks | grep -e 'name:' -e 'index' | sed -n '{H;$!d};x;s|^\n||;s|\n|:|g;s|.*    i||g;s|>.*||g;s|.*<||g;p;')
 
 config_file="/etc/pulse/default.pa"
 search="set-default-sink "

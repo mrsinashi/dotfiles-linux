@@ -5,7 +5,7 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-Base_packages=(curl util-linux apt-transport-https wget gpg htop x11-utils udisks2 jq mlocate lxqt-sudo pavucontrol cmake nginx)
+Base_packages=(nvidia-driver-525 curl util-linux apt-transport-https wget gpg htop x11-utils udisks2 jq mlocate lxqt-sudo pavucontrol cmake nginx)
 WM_packages=(i3 polybar lightdm fonts-font-awesome fonts-noto rofi hsetroot wmctrl gsimplecal numlockx)
 Additional_packages=(thunar xfce4-terminal xarchiver inkscape vlc virtualbox qbittorrent openvpn easy-rsa virtualbox-ext-pack evolution filezilla kolourpaint flameshot telegram-desktop gpick)
 Dev_packages=(redis)
