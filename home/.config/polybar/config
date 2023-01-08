@@ -3,8 +3,9 @@ margin-top = 0
 margin-bottom = 0
 
 [colors]
-background = #2F343F
-foreground = #f3f4f5
+bg = #2F343F
+fg = #f3f4f5
+sel = #464B59
 
 [settings]
 throttle-output = 15
@@ -18,12 +19,12 @@ compositing-border = over
 
 [bar/mybar]
 modules-left = i3
-modules-right = usb-dev ip cpu memory volume xkeyboard datetime powermenu
+modules-right = usb-udev weather weather2 ip vpn cpu memory sink volume xkeyboard time date powermenu
 
 width = 100%
 height = 36
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.bg}
+foreground = ${colors.fg}
 
 line-size = 2
 module-margin = 1
@@ -33,13 +34,30 @@ tray-padding = 2
 tray-maxsize = 28
 tray-scale = 1.0
 tray-position = center
-
+tray-offset-x = -660
+ 
 font-0 = "Noto Sans:size=12;0"
 font-1 = "FontAwesome:size=14;0"
 font-2 = "DejaVu Sans:size=6;0"
 font-3 = "DejaVu Sans:size=8;0"
 font-4 = "Clear Sans:size=18;0"
 font-5 = "Noto Sans Mono:style=Bold:size=13;0"
+font-6 = "Sinashi:size=13;0"
+font-7 = "Noto Sans:style=Bold:size=12;0"
+
+enable-ipc = true
+
+[module/test]
+type = custom/ipc
+hook-0 = bash /home/user/.config/polybar/scripts/vpn.sh
+hook-1 = bash /home/user/.config/polybar/scripts/vpn.sh --on
+hook-2 = bash /home/user/.config/polybar/scripts/vpn.sh --off
+initial = 1
+click-left = "#vpn2.hook.1"
+click-right = "#vpn2.hook.2"
+click-middle = "#vpn2.hook."
+format-underline = #ffffff
+format = "AAAA<output>"
 
 [module/i3]
 type = internal/i3
@@ -52,16 +70,16 @@ wrapping-scroll = false
 reverse-scroll = true
 fuzzy-match = false
 
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
+ws-icon-0 = 1;F
+ws-icon-1 = 2;H
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
 ws-icon-4 = 5;5
 ws-icon-5 = 6;6
 ws-icon-6 = 7;7
 ws-icon-7 = 8;8
 ws-icon-8 = 9;9
-ws-icon-9 = 10;10
+ws-icon-9 = 10;0
 
 format = <label-state> <label-mode>
 
@@ -70,31 +88,36 @@ label-mode-font = 5
 label-mode-foreground = #cd1f3f
 label-mode-underline = #cd1f3f
 
+label-focused-font = 7
 label-focused = %icon%
+label-focused-background = ${colors.sel}
 label-focused-foreground = #7fc7ff
 label-focused-padding = 2
 label-focused-margin = 1
 label-focused-underline = #7fc7ff
 
+label-unfocused-font = 7
 label-unfocused = %icon%
-label-unfocused-foreground = ${colors.foreground}
+label-unfocused-foreground = ${colors.fg}
 label-unfocused-padding = 2
 label-unfocused-margin = 1
 label-unfocused-underline = #ffffff
 
+label-visible-font = 7
 label-visible = %icon%
 label-visible-padding = 2
 label-visible-margin = 1
 label-visible-underline = #7fc7ff
 
+label-urgent-font = 7
 label-urgent = %icon%
 label-urgent-foreground = #cd1f3f
 label-urgent-padding = 2
 label-urgent-margin = 1
 label-urgent-underline = #cd1f3f
 
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
+format-foreground = ${colors.fg}
+format-background = ${colors.bg}
 
 [module/usb-udev]
 type = custom/script
@@ -103,18 +126,47 @@ tail = true
 click-left = $HOME/.config/polybar/scripts/system-usb-udev.sh --mount &
 click-right = $HOME/.config/polybar/scripts/system-usb-udev.sh --unmount &
 format-prefix = ""
-format-prefix-margin-right = 2
+format-prefix-margin = 1
+label-margin = 1
+format-background = ${colors.sel}
+format-foreground = #ffffff
+format-underline = #ffffff
+
+[module/weather]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/weather.sh
+click-left = google-chrome-stable "https://www.gismeteo.ru/weather-irkutsk-4787/now/"
+interval = 600
+tail = true
+format-foreground = #ffffff
+format-underline = #ffffff
+
+[module/weather2]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/weather.sh --minsk
+click-left = google-chrome-stable "https://www.gismeteo.ru/weather-minsk-4248/now/"
+interval = 600
+tail = true
 format-foreground = #ffffff
 format-underline = #ffffff
 
 [module/ip]
 type = custom/script
-exec = /usr/bin/hostname -I
+exec = ip addr | grep inet | grep enp | awk '{print $2}' | sed 's|\/.*||'
 interval = 20
 tail = true
-format-prefix = ""
+format-prefix = "C"
+format-prefix-font = 7
 format-prefix-margin-right = 2
 format-foreground = #ffffff
+format-underline = #888F9B
+
+[module/vpn]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/vpn.sh
+click-left = $HOME/.config/polybar/scripts/vpn.sh --on
+click-right = $HOME/.config/polybar/scripts/vpn.sh --off
+tail = true
 format-underline = #ffffff
 
 [module/cpu]
@@ -122,10 +174,10 @@ type = internal/cpu
 interval = 2
 
 format-prefix = ""
-format-prefix-foreground = #cd1f3f
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-format-underline = #cd1f3f
+format-prefix-foreground = #CD1F3F
+format-foreground = ${colors.fg}
+format-background = ${colors.bg}
+format-underline = #CD1F3F
 
 label = %percentage:3%%
 format = <label>
@@ -135,28 +187,44 @@ type = internal/memory
 interval = 2
 
 format-prefix = ""
-format-prefix-foreground = #3384d0
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-format-underline = #3384d0
+format-prefix-foreground = #4C86E6
+format-foreground = ${colors.fg}
+format-background = ${colors.bg}
+format-underline = #4C86E6
 
 label = %percentage_used:3%% [%gb_used%]
 format = <label>
+
+[module/sink]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/system-change-sink.sh &
+tail = true
+click-left = $HOME/.config/polybar/scripts/system-change-sink.sh --change &
+click-right = $HOME/.config/polybar/scripts/system-change-sink.sh &
+format-font = 7
+format-foreground = #ffffff
+format-underline = #5FCF3B
 
 [module/volume]
 type = internal/volume
 format-volume = "<label-volume>  <bar-volume>"
 
-label-volume = ""
-label-volume-foreground = #5fcf3b
-format-volume-underline = #5fcf3b
+label-volume-font = 7
+label-volume = "D"
+label-volume-foreground = #5FCF3B
+format-volume-underline = #5FCF3B
 
-label-muted = " "
+format-muted-prefix-font = 7
+format-muted-prefix = "E  "
+format-muted-foreground = #cd1f3f
+label-muted = "%{T4}%{F#cd1f3f}█%{T3}%{F-}▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁"
+
 label-muted-foreground = #cd1f3f
+label-muted-font = 3
 format-muted-underline = #cd1f3f
 
 bar-volume-width = 20
-bar-volume-foreground-0 = #5fcf3b
+bar-volume-foreground-0 = #5FCF3B
 
 bar-volume-indicator = █
 bar-volume-indicator-font = 4
@@ -170,18 +238,30 @@ bar-volume-empty-font = 3
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
-label-layout = "%layout:3%"
+blacklist-1 = scroll lock
+label-layout = "%layout%"
 label-layout-font = 5
-label-indicator-background = ${colors.background}
+label-layout-margin-left = 1
+label-indicator-background = ${colors.bg}
 format-underline = #ffffff
 
-[module/datetime]
+[module/time]
 type = internal/date
 interval = 1
 date = %d.%m.%Y
 time = %H:%M:%S
-label =  %time%    %date%
-label-underline = #ffffff
+label =  %time%
+label-underline = #888F9B
+
+[module/date]
+type = custom/script
+tail = true
+exec = date +%d.%m.%Y
+click-left = gsimplecal
+click-right = kill $(pgrep gsimplecal)
+format-prefix = ""
+format-prefix-margin-right = 2
+format-underline = #888F9B
 
 [module/powermenu]
 type = custom/menu

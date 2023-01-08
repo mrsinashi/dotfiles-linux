@@ -66,7 +66,7 @@ case "$1" in
 
         for unmount in $(echo "$devices" | jq -r '.blockdevices[] | select(.type == "part") | select(.rm == true) | select(.mountpoint != null) | .name'); do
             udisksctl unmount --no-user-interaction -b "$unmount"
-            udisksctl power-off --no-user-interaction -b "$unmount"
+            #udisksctl power-off --no-user-interaction -b "$unmount"
         done
 
         usb_update
@@ -80,7 +80,7 @@ case "$1" in
         while true; do
             usb_print
 
-            sleep 7 &
+            sleep 1 &
             wait
         done
         ;;

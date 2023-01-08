@@ -1,0 +1,5 @@
+# deb cdrom:[Ubuntu 22.04.1 LTS _Jammy Jellyfish_ - Release amd64 (20220809.1)]/ jammy main restricted
+deb http://ru.archive.ubuntu.com/ubuntu/ jammy main restricted universe multiverse
+deb http://ru.archive.ubuntu.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb http://ru.archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu jammy-security main restricted universe multiverse

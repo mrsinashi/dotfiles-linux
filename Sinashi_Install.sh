@@ -8,6 +8,11 @@ yellow="\033[33m"
 blue="\033[36m"
 default="\033[0m\n"
 
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root"
+   exit 1
+fi
+
 update_configs() {
     home_dirs=$(cd home; find . -mindepth 1 -type d | sed -r 's/.{,2}//'; cd ..)
     home_files=$(cd home; find . -mindepth 1 -type f | sed -r 's/.{,2}//'; cd ..)
@@ -84,26 +89,49 @@ update_configs() {
 
 }
 
-case "$1" in
-    --user)
-        if [ -n "$2" ]
-        then
-            default_home="/home/$2"
-        else
-            echo -e "\033[31mError:\033[0m Username not specified"
-            err="true"
-        fi
-        ;;
-    *)
-        ;;
-esac
+edit_config() {
+    i3_config=$default_home/.config/i3/config
+    search="set \$SCREENWIDTH"
+    screensize=$(/usr/bin/xrandr | grep '*' | sed 's|x.*||; s| ||g')
+    let screensize=$screensize-230
+    set_screensize="set \$SCREENWIDTH $screensize"
+    sed -i "s|.*$search.*|$set_screensize|g" $i3_config
+    echo -e "File ($i3_config) \033[32mchanged\033[0m"
+    echo -e "Parameter (\$SCREENWIDTH) set to $screensize\n"
+}
+
+while [ -n "$1" ]
+do
+    case "$1" in
+        --user)
+            if [ -n "$2" ]
+            then
+                default_home="/home/$2"
+            else
+                echo -e "\033[31mError:\033[0m Username not specified"
+                err="true"
+            fi
+            ;;
+        --nohome)
+            nohome="--nohome"
+            ;;
+        *)
+            echo -e "\033[0;31m\033[1mInvalid argument (\033[0m$1\033[0;31m\033[1m)"
+            exit
+            ;;
+    esac
+    shift
+done
 
 if [[ $err == "false" ]]
 then
     if [[ -d $default_home ]]
     then
         update_configs
+        edit_config
     else
         echo -e "\033[31mError:\033[0m Directory ($default_home) not exists"
     fi
 fi
+
+./apt_install.sh --all $nohome
