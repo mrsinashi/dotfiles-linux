@@ -115,6 +115,9 @@ do
         --nohome)
             nohome="--nohome"
             ;;
+        --noext)
+            noext="--noext"
+            ;;
         *)
             echo -e "\033[0;31m\033[1mInvalid argument (\033[0m$1\033[0;31m\033[1m)"
             exit
@@ -134,4 +137,4 @@ then
     fi
 fi
 
-./apt_install.sh --all $nohome
+./apt_install.sh --all $nohome $noext
