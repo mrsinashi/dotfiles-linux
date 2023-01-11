@@ -1,28 +1,24 @@
 #!/bin/bash
 
-userfile=$(pgrep -a openvpn$ | awk '{print $NF }')
+userfile=$(pgrep -a openvpn | awk '{print $NF }';)
 
 ovpn_status() {
     if ! [[ $userfile == "" ]]
     then
-        vpnstatus=$(cat $userfile | grep "remote " | awk '{print $2}')
-        echo "%{B#464B59}%{u#5fcf3b}%{F#5fcf3b}%{T7} M%{T-}%{F#-}  $vpnstatus "
+        vpnstatus=$(cat $userfile | grep "remote " | awk '{print $2}';)
+        echo "%{B#464B59}%{u#5fcf3b}%{F#5fcf3b}%{T7} M%{T-}%{F#-}  $vpnstatus ";
     else
         vpnstatus="Off"
-        echo "%{u#cd1f3f}%{F#CD1F3F}%{T7}N%{T-}%{F#-}  $vpnstatus"
+        echo "%{u#cd1f3f}%{F#CD1F3F}%{T7}N%{T-}%{F#-}  $vpnstatus";
     fi
 }
 
-ovpn_getfile () {
-    find /etc/openvpn/ -name "*.ovpn"
-}
-
 ovpn_on() {
-    sudo openvpn --config $(ovpn_getfile) &
+    sudo /usr/sbin/openvpn --config $(find /etc/openvpn/ -name "*.ovpn");
 }
 
 ovpn_off() {
-    sudo kill -9 $(pgrep openvpn) &
+    sudo kill -9 $(pgrep openvpn);
 }
 
 ovpn_toggle() {
@@ -38,7 +34,7 @@ ovpn_update() {
     pid=$(cat "$path_pid")
 
     if [ "$pid" != "" ]; then
-        kill -10 $(pgrep system-vpn) 
+        kill -10 $(pgrep system-vpn); 
     fi
 }
 

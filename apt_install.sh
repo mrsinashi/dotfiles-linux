@@ -9,7 +9,7 @@ Base_packages=(nvidia-driver-525 curl util-linux apt-transport-https wget gpg ht
 WM_packages=(i3 polybar lightdm fonts-font-awesome fonts-noto rofi hsetroot wmctrl gsimplecal numlockx)
 Additional_packages=(thunar xfce4-terminal xarchiver inkscape vlc virtualbox qbittorrent openvpn easy-rsa virtualbox-ext-pack evolution filezilla kolourpaint flameshot telegram-desktop gpick)
 Dev_packages=(redis)
-Home_packages=(steam cryptomator)
+Home_packages=(steam)
 
 apt_ext_config() {
     if [[ $external == "True" ]]

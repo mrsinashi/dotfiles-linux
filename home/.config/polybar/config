@@ -152,7 +152,7 @@ format-underline = #ffffff
 
 [module/ip]
 type = custom/script
-exec = ip addr | grep inet | grep enp | awk '{print $2}' | sed 's|\/.*||'
+exec = ip addr | grep inet | grep -P "enp|eno" | awk '{print $2}' | sed 's|\/.*||'
 interval = 20
 tail = true
 format-prefix = "C"
