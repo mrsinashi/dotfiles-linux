@@ -104,19 +104,21 @@ while [ -n "$1" ]
 do
     case "$1" in
         --user)
-            if [ -n "$2" ]
+            shift
+            if [ -n "$1" ]
             then
-                default_home="/home/$2"
+                default_home="/home/$1"
             else
                 echo -e "\033[31mError:\033[0m Username not specified"
                 err="true"
             fi
             ;;
-        --nohome)
-            nohome="--nohome"
-            ;;
-        --noext)
-            noext="--noext"
+        --params)
+            while [[ $(echo $2 | grep "\-\-") == "" ]]
+            do
+                params+=("--$2")
+                shift
+            done
             ;;
         *)
             echo -e "\033[0;31m\033[1mInvalid argument (\033[0m$1\033[0;31m\033[1m)"
@@ -137,4 +139,4 @@ then
     fi
 fi
 
-./apt_install.sh --all $nohome $noext
+./apt_install.sh --all $params
